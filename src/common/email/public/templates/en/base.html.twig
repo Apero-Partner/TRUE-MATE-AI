@@ -1,0 +1,29 @@
+{% block logo %}
+	<br>
+{% endblock %}
+{% block salutation %}
+	Hi
+	{{ user.name }},<br>
+	<br>
+{% endblock %}
+
+{% block body %}
+	{% block message %}{% endblock %}
+	{% block table %}{% endblock %}
+{% endblock %}
+
+{% block message2 %}{% endblock %}
+
+{% block thanks %}
+	<br>
+	<p>
+		<span style="font-weight: 700">SOJO HOTELS</span><br/>
+		<span style="font-weight: 700">Trailblazer with Vietnamese soul.</span>
+	</p>
+	<br>
+{% endblock %}
+
+{% block footer %}
+	<br>
+	<div class="footer"></div>
+{% endblock %}
