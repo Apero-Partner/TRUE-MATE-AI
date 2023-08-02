@@ -1,19 +1,17 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Connection, Repository, DataSource } from 'typeorm';
+import { Repository, DataSource } from 'typeorm';
+import moment from 'moment';
 
-import { APP_CONFIG } from '../../configs/app.config';
-import { ResponseError } from './message.enum';
 import { Message } from '../../core/entity/message.entity';
-import { Role } from '../../core/enum/role.enum';
 import { JoinsModel, ParamsQueryModel } from './model/message.interface.model';
 import { CurrentUserModel } from '../../core/model/current-user.model';
-import { UserService } from '../user/user.service';
 import { PaginationOptionsModel } from '../../core/model/pagination-options.model';
 import { ConversationService } from '../conversation/conversation.service';
 import { OpenAiService } from '../open-ai/open-ai.service';
 import { CreateMesssageDTO } from './model/message.dto';
-import { TypeMessage } from 'src/core/enum';
+import { TypeMessage } from '../../core/enum';
+import { Conversation } from '../../core/entity/conversation.entity';
 
 @Injectable()
 export class MessageService {
@@ -51,7 +49,7 @@ export class MessageService {
     return result;
   }
 
-/*   async findOneByFields(params: ParamsQueryModel, options: { isThrowErrorIfNotExist: boolean }) {
+  /*   async findOneByFields(params: ParamsQueryModel, options: { isThrowErrorIfNotExist: boolean }) {
     const queryBuild = this.messageRepository.createQueryBuilder('message');
     queryBuild.where('message.isDeleted = false');
     if (params?.id) {
@@ -97,6 +95,11 @@ export class MessageService {
       const entityFromBot = queryRunner.manager.getRepository(Message).create({ type: TypeMessage.BOT, content: responseFromOpenAi, conversation });
       const resultFromBot = await queryRunner.manager.getRepository(Message).save(entityFromBot);
 
+      //7. update the last message của cuộc hội thoại
+      conversation.lastMessage = body.text;
+      conversation.updatedAt = moment().toDate();
+      await queryRunner.manager.getRepository(Conversation).update(conversation.id, conversation);
+
       await queryRunner.commitTransaction();
       return {
         bot: resultFromBot,
@@ -104,6 +107,7 @@ export class MessageService {
       };
     } catch (error) {
       await queryRunner.rollbackTransaction();
+      throw error;
     } finally {
       await queryRunner.release();
     }
