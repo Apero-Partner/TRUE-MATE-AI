@@ -8,7 +8,7 @@ RUN yarn
 COPY . .
 RUN  yarn build
 
-FROM node:14-alpine
+FROM node:18-alpine
 
 COPY --from=builder /usr/src/tru-mate/dist /usr/src/tru-mate/dist
 COPY --from=builder /usr/src/tru-mate/node_modules /usr/src/tru-mate/node_modules
