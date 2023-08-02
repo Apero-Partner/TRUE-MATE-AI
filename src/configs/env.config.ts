@@ -53,7 +53,7 @@ const envConfig: AppEnvironment = {
     WEB_URL: process.env.MAIL_CONFIG_SMTP_WEB_URL || '',
   },
   OPEN_AI: {
-    API_KEY: process.env.OPEN_AI_API_KEY || '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',
+    API_KEY: process.env.OPEN_AI_API_KEY || 'a,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,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',
     MODEL: process.env.OPEN_AI_MODEL || 'gpt-3.5-turbo',
     ROLE: 'user',
   },
