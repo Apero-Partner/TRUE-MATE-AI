@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import moment from 'moment';
+import 'moment-timezone';
 
 import { Message } from '../../core/entity/message.entity';
 import { JoinsModel, ParamsQueryModel } from './model/message.interface.model';
@@ -88,7 +89,6 @@ export class MessageService {
       const responseFromOpenAi = await this.openAiService.AskByText(parse);
 
       // 6. insert message của bot + người dùng
-
       const entityFromUser = queryRunner.manager.getRepository(Message).create({ type: TypeMessage.USER, content: body.text, conversation });
       const resultFromUser = await queryRunner.manager.getRepository(Message).save(entityFromUser);
 
@@ -96,8 +96,8 @@ export class MessageService {
       const resultFromBot = await queryRunner.manager.getRepository(Message).save(entityFromBot);
 
       //7. update the last message của cuộc hội thoại
-      conversation.lastMessage = body.text;
-      conversation.updatedAt = moment().toDate();
+      conversation.lastMessage = `${body.text.slice(0, 30)}...`; // lấy 30 kí tự đầu rồi thêm ... vào sau
+      conversation.updatedAt = moment().tz('UTC').toDate();
       await queryRunner.manager.getRepository(Conversation).update(conversation.id, conversation);
 
       await queryRunner.commitTransaction();
