@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     image: nodejs
     container_name: app
-    restart: unless-stopped
+    restart: always
     environment:
       - POSTGRESQL_USERNAME=postgres
       - POSTGRESQL_PASSWORD=postgres

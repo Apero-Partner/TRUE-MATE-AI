@@ -1,8 +1,6 @@
 export class ParamsQueryModel {
-  id?: number | string;
-  lastMessage?: string;
-  deviceId?: string;
   userId?: number;
+  conversationId?: number;
 }
 
 export class JoinsModel {

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { RegisterUserDTO } from './model/user.dto';
 import { AuthticateGuard } from '../../security/guards';
@@ -24,5 +24,4 @@ export class UserController {
     const create = await this.userService.register(body);
     return create;
   }
-
 }

@@ -5,4 +5,5 @@ export class PayloadModel {
 export class ParamsQueryModel {
   id?: number;
   deviceId?: string;
+  isActive?: boolean;
 }

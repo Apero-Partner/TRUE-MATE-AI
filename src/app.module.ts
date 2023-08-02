@@ -14,6 +14,7 @@ import { AllExceptionsFilter } from './exception-filter/all.exceptions.filter';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { UserModuleAdmin } from './module-client/user/user.module';
 import { ConversationModuleAdmin } from './module-client/conversation/conversation.module';
+import { MessageModuleAdmin } from './module-client/message/message.module';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({ useFactory: ormConfig }),
@@ -22,6 +23,7 @@ import { ConversationModuleAdmin } from './module-client/conversation/conversati
     }),
     UserModuleAdmin,
     ConversationModuleAdmin,
+    MessageModuleAdmin,
   ],
   controllers: [AppController],
   providers: [AppService],

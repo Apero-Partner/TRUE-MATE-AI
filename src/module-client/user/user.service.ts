@@ -28,6 +28,9 @@ export class UserService {
     if (params?.deviceId) {
       queryBuild.andWhere('user.deviceId = :deviceId', { deviceId: params?.deviceId });
     }
+    if (params?.isActive) {
+      queryBuild.andWhere('user.isActive = :isActive', { isActive: params?.isActive });
+    }
     const result = await queryBuild.getOne();
     if (options.isThrowErrorIfNotExist === true) {
       if (!result) throw new BadRequestException(ResponseError.ERROR_USER_NOT_FOUND);
@@ -37,10 +40,15 @@ export class UserService {
   }
 
   async register(body: RegisterUserDTO) {
+    const user = await this.findOneByFields({ deviceId: body.deviceId }, { isThrowErrorIfNotExist: false });
+    if (user) {
+      const token = this.signToken({ deviceId: user.deviceId, userId: user.id, role: user.role });
+      return { token };
+    }
     const create = this.userRepository.create(body);
     const result = await this.userRepository.save(create);
-    console.log(result);
     const token = this.signToken({ deviceId: result.deviceId, userId: result.id, role: result.role });
+
     return { token };
   }
 

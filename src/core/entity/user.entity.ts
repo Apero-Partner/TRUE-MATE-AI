@@ -5,7 +5,7 @@ import { Conversation } from './conversation.entity';
 
 @Entity('user')
 export class User extends BaseEntity {
-  @Column({ nullable: false, type: 'text' })
+  @Column({ nullable: false, type: 'text', unique: true })
   deviceId: string;
 
   @Column({ nullable: false, type: 'enum', enum: Role, default: Role.ANONYMOUS })

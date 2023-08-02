@@ -14,9 +14,9 @@ export class Conversation extends BaseEntity {
   @Column({ type: 'boolean', default: false })
   isPin: boolean;
 
-  @OneToMany(() => Message, (message) => message.conversation)
-  messages: Message[];
-
   @Column({ type: 'boolean', default: false })
   isDeleted: boolean;
+
+  @OneToMany(() => Message, (message) => message.conversation)
+  messages: Message[];
 }

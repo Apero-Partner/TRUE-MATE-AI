@@ -45,4 +45,9 @@ export interface AppEnvironment {
     };
     WEB_URL: string;
   };
+  OPEN_AI: {
+    API_KEY: string;
+    MODEL: string;
+    ROLE: 'system' | 'user' | 'assistant' | 'function';
+  };
 }
