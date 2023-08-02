@@ -1,20 +1,12 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 import { BaseEntity } from './base/base.entity';
 import { Role } from '../enum';
+import { Conversation } from './conversation.entity';
 
 @Entity('user')
 export class User extends BaseEntity {
   @Column({ nullable: false, type: 'text' })
   deviceId: string;
-
-  @Column({ nullable: false, type: 'int', default: 0 })
-  coin: number;
-
-  @Column({ nullable: false, type: 'int', default: 10 })
-  chatRemaining: string;
-
-  @Column({ nullable: true, type: 'date', default: null })
-  vipUntil: Date;
 
   @Column({ nullable: false, type: 'enum', enum: Role, default: Role.ANONYMOUS })
   role: Role;
@@ -24,4 +16,7 @@ export class User extends BaseEntity {
 
   @Column({ type: 'boolean', default: false })
   isDeleted: boolean;
+
+  @OneToMany(() => Conversation, (conversation) => conversation.user)
+  conversations: Conversation[];
 }
