@@ -9,8 +9,8 @@ const envConfig: AppEnvironment = {
   NODE_ENV: process.env.NODE_ENV || 'local',
   VERSION: process.env.VERSION || 'v1',
   APP: {
-    PORT: Number(process.env.APP_PORT) || 9999,
-    NAME: process.env.APP_NAME || 'audit',
+    PORT: Number(process.env.APP_PORT) || 3000,
+    NAME: process.env.APP_NAME || 'AI-serivce',
   },
   DATABASE: {
     POSTGRESQL: {
@@ -53,7 +53,9 @@ const envConfig: AppEnvironment = {
     WEB_URL: process.env.MAIL_CONFIG_SMTP_WEB_URL || '',
   },
   OPEN_AI: {
-    API_KEY: process.env.OPEN_AI_API_KEY || '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',
+    API_KEY:
+      process.env.OPEN_AI_API_KEY ||
+      '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,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,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',
     MODEL: process.env.OPEN_AI_MODEL || 'gpt-3.5-turbo',
     ROLE: 'user',
   },

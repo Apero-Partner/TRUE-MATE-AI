@@ -2,10 +2,8 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { APP_CONFIG } from '../../configs/app.config';
 import { ResponseError } from './conversation.enum';
 import { Conversation } from '../../core/entity/conversation.entity';
-import { Role } from '../../core/enum/role.enum';
 import { JoinsModel, ParamsQueryModel } from './model/conversation.interface.model';
 import { CurrentUserModel } from '../../core/model/current-user.model';
 import { UserService } from '../user/user.service';

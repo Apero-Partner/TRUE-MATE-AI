@@ -48,7 +48,6 @@ export class ConversationController {
     roles: [Role.ANONYMOUS],
   })
   async post(@CurrentUser() inforUser: CurrentUserModel) {
-    console.log(inforUser);
     const create = await this.conversationService.create(inforUser);
     return create;
   }

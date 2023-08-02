@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { MessageService } from './message.service';
 import { AuthticateGuard } from '../../security/guards';
 import { Role } from '../../core/enum';
@@ -34,12 +34,11 @@ export class MessageController {
     return response;
   }
 
-  @Post('/create')
+  @Post('/ask')
   @AuthticateGuard({
     roles: [Role.ANONYMOUS],
   })
   async post(@CurrentUser() inforUser: CurrentUserModel, @Body() body: CreateMesssageDTO) {
-    console.log(inforUser);
     const create = await this.messageService.create(inforUser, body);
     return create;
   }

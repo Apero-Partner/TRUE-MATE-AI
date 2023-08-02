@@ -33,6 +33,6 @@ export class AppModule implements NestModule {
     MorganMiddleware.configure('dev');
     CompressionMiddleware.configure({});
     CorsMiddleware.configure({});
-    consumer.apply(MorganMiddleware, CompressionMiddleware, LoggerMiddleware).forRoutes('*');
+    consumer.apply(MorganMiddleware, CompressionMiddleware).forRoutes('*');
   }
 }
