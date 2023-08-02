@@ -20,7 +20,7 @@ async function ormConfig(): Promise<DataSourceOptions> {
     database: APP_CONFIG.ENV.DATABASE.POSTGRESQL.NAME,
     username: APP_CONFIG.ENV.DATABASE.POSTGRESQL.USERNAME,
     password: APP_CONFIG.ENV.DATABASE.POSTGRESQL.PASSWORD,
-    logging: true, // log query trong sql
+    logging: false, // log query trong sql
     synchronize: config.SYNCHRONIZE,
     entities: config.ENTITIES,
     migrations: config.MIGRATIONS,

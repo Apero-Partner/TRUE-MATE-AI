@@ -18,7 +18,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
 
   handleRequest(err: any, user: any, info: any, context: any) {
     if (err) throw new UnauthorizedException({ message: HttpCodeError.REQUEST_ERRORS['401'].message, statusCode: 401 });
-    console.log('handleRequest', user);
     const request = context.switchToHttp().getRequest();
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
     const allowAnonymous = this.reflector.get<string[]>('allowAnonymous', context.getHandler());

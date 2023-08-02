@@ -50,7 +50,12 @@ const envConfig: AppEnvironment = {
         pass: process.env.MAIL_CONFIG_SMTP_PASS || '',
       },
     },
-    WEB_URL: process.env.MAIL_CONFIG_SMTP_WEB_URL || 'https://email.tnginter.com/',
+    WEB_URL: process.env.MAIL_CONFIG_SMTP_WEB_URL || '',
+  },
+  OPEN_AI: {
+    API_KEY: process.env.OPEN_AI_API_KEY || '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',
+    MODEL: process.env.OPEN_AI_MODEL || 'gpt-3.5-turbo',
+    ROLE: 'user',
   },
 };
 export default envConfig;
