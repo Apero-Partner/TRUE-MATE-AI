@@ -1,0 +1,30 @@
+version: '1'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: app
+    restart: unless-stopped
+    environment:
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=postgres
+      - POSTGRESQL_HOST=db
+      - POSTGRESQL_PORT=5432
+      - POSTGRESQL_NAME=tru-mate-local
+      - PORT=3000
+    ports:
+      - "3000:3000"
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes: 
+      - /db:/var/lib/postgresql/data
+

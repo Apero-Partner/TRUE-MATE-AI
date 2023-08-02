@@ -25,8 +25,4 @@ export class UserController {
     return create;
   }
 
-  @Put('/:id/change-active')
-  async changeActive() {
-    return 1;
-  }
 }

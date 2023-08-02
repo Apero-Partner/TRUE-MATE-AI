@@ -13,7 +13,6 @@ import { AppService } from './app.service';
 import { AllExceptionsFilter } from './exception-filter/all.exceptions.filter';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { UserModuleAdmin } from './module-client/user/user.module';
-import { CharacterModuleAdmin } from './module-admin/character/character.module';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({ useFactory: ormConfig }),
@@ -21,7 +20,6 @@ import { CharacterModuleAdmin } from './module-admin/character/character.module'
       rootPath: join(__dirname, '..'),
     }),
     UserModuleAdmin,
-    CharacterModuleAdmin,
   ],
   controllers: [AppController],
   providers: [AppService],

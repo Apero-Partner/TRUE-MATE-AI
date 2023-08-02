@@ -36,18 +36,18 @@ const envConfig: AppEnvironment = {
     },
   },
   STORAGE: {
-    DOMAIN: process.env.STORAGE_MEDIA_DOMAIN || 'https://uat-audit-media.sojohotels.com', // https://uat-audit-media.sojohotels.com http://localhost:9999/_data
+    DOMAIN: process.env.STORAGE_MEDIA_DOMAIN || '', //  http://localhost:9999/_data
     ROOT: path.join(__dirname, '../../', '_data/upload/storage'),
   },
   MAIL_CONFIG: {
-    FROM: process.env.MAIL_CONFIG_SMTP_FROM || 'audit@tnteco.vn',
+    FROM: process.env.MAIL_CONFIG_SMTP_FROM || '',
     SMTP_CONFIG: {
       service: process.env.MAIL_CONFIG_SMTP_SERVICE || '',
-      host: process.env.MAIL_CONFIG_SMTP_HOST || 'email.tnginter.com',
+      host: process.env.MAIL_CONFIG_SMTP_HOST || '',
       port: Number(process.env.MAIL_CONFIG_SMTP_PORT) || 587,
       auth: {
-        user: process.env.MAIL_CONFIG_SMTP_USER || 'audit',
-        pass: process.env.MAIL_CONFIG_SMTP_PASS || 'tntech@2023',
+        user: process.env.MAIL_CONFIG_SMTP_USER || '',
+        pass: process.env.MAIL_CONFIG_SMTP_PASS || '',
       },
     },
     WEB_URL: process.env.MAIL_CONFIG_SMTP_WEB_URL || 'https://email.tnginter.com/',
