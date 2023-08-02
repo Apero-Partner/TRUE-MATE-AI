@@ -1,30 +1,44 @@
-version: '1'
-
 services:
-  app:
+  true-mate-ai-api:
+    container_name: 'true-mate-ai-api'
+    restart: always
+    depends_on:
+      - postgres
     build:
-      context: .
       dockerfile: Dockerfile
-    image: nodejs
-    container_name: app
-    restart: always
+      context: .
+      # Only will build development stage from our dockerfile
+      target: development
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env
     environment:
-      - POSTGRESQL_USERNAME=postgres
-      - POSTGRESQL_PASSWORD=postgres
-      - POSTGRESQL_HOST=db
-      - POSTGRESQL_PORT=5432
-      - POSTGRESQL_NAME=tru-mate-local
-      - PORT=3000
+      POSTGRESQL_HOST: postgres
+    # Run a command against the development stage of the image
+    command: yarn start:dev
     ports:
-      - "3000:3000"
-  db:
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
-    volumes: 
-      - /db:/var/lib/postgresql/data
+      - 3000:3000
+    networks:
+      - my_network
 
+  postgres:
+    image: postgres
+    restart: always
+    container_name: 'postgres'
+    environment:
+      POSTGRES_USER: ${POSTGRESQL_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRESQL_USERNAME}
+      POSTGRES_DB: ${POSTGRESQL_NAME}
+    ports:
+      - 5432:${POSTGRESQL_PORT}
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    networks:
+      - my_network
+volumes:
+  postgres_data:
+
+networks:
+  my_network:
+    driver: bridge
