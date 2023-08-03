@@ -11,7 +11,7 @@ export class getAllConversationsDTO {
   isDeleted?: boolean;
 
   @IsOptional()
-  id?: number;
+  id?: string;
 
   @IsOptional()
   page?: string;

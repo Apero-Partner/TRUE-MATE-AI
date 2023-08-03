@@ -1,6 +1,6 @@
 export class ParamsQueryModel {
-  userId?: number;
-  conversationId?: number;
+  userId?: string;
+  conversationId?: string;
 }
 
 export class JoinsModel {

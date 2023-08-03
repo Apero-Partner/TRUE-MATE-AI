@@ -1,7 +1,7 @@
 import { Role } from '../enum';
 
 export class CurrentUserModel {
-  userId: number;
+  userId: string;
   deviceId: string;
   role: Role;
 }

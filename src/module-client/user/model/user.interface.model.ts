@@ -3,7 +3,7 @@ export class PayloadModel {
 }
 
 export class ParamsQueryModel {
-  id?: number;
+  id?: string;
   deviceId?: string;
   isActive?: boolean;
 }

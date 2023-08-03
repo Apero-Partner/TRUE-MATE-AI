@@ -52,7 +52,7 @@ export class UserService {
     return { token };
   }
 
-  signToken(payload: { deviceId: string; userId: number; role: Role }) {
+  signToken(payload: { deviceId: string; userId: string; role: Role }) {
     const token = this.jwtService.sign(payload, {
       secret: APP_CONFIG.ENV.SECURE.JWT.JWT_SECRET,
       expiresIn: APP_CONFIG.ENV.SECURE.JWT.EXPIRE,

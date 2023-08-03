@@ -3,13 +3,13 @@ import * as path from 'path';
 import { DataSourceOptions } from 'typeorm';
 async function ormConfig(): Promise<DataSourceOptions> {
   const config = {
-    SYNCHRONIZE: true,
+    SYNCHRONIZE: false,
     ENTITIES: [path.join(__dirname, '..') + '/core/entity/*.entity{.ts,.js}'],
     MIGRATIONS: [path.join(__dirname, '..') + '/core/migrations/**/*{.ts,.js}'],
     CLI: {
       migrationsDir: 'src/core/migrations',
     },
-    MIGRATIONS_RUN: true,
+    MIGRATIONS_RUN: false,
   };
 
   const ormconfig: DataSourceOptions = {

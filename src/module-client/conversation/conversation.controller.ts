@@ -1,4 +1,4 @@
-import { Controller, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseUUIDPipe, Post, Query } from '@nestjs/common';
 import { ConversationService } from './conversation.service';
 import { AuthticateGuard } from '../../security/guards';
 import { Role } from '../../core/enum';
@@ -38,7 +38,7 @@ export class ConversationController {
   @AuthticateGuard({
     roles: [Role.ANONYMOUS],
   })
-  async getId(@CurrentUser() inforUser: CurrentUserModel, @Param('id', ParseIntPipe) id: number) {
+  async getId(@CurrentUser() inforUser: CurrentUserModel, @Param('id', ParseUUIDPipe) id: string) {
     const user = await this.conversationService.findOneByFields({ id, userId: inforUser.userId }, { isThrowErrorIfNotExist: true });
     return user;
   }
